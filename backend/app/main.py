@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from app.database import db
 from app.auth import hash_password, verify_password, create_access_token
 from app.schemas import UserCreate, UserLogin, UserResponse, Token, TaskCreate, TaskResponse
-from app.dependencies import getCurrentUser,requireAdmin
+from app.dependencies import getCurrentUser
 from typing import List
 
 logging.basicConfig(filename="server.log", level=logging.INFO, format="%(asctime)s - %(message)s")
