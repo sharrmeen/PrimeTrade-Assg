@@ -1,0 +1,35 @@
+datasource db{
+    provider = "postgresql"
+    url=env("DATABASE_URL")
+}
+
+
+generator client {
+  provider = "prisma-client-py"
+  interface = "asyncio"
+  recursive_type_depth = 5
+}
+
+model User{
+    id String @id @default(uuid())
+    name String
+    email String @unique
+    password String
+    role Role @default(USER)
+    tasks Task[]
+}
+
+model Task{
+    id String @id @default(uuid())
+    title String
+    description String
+    status String @default("Pending")
+    ownerId String
+    owner User @relation(fields:[ownerId],references:[id])
+    createdAt DateTime @default(now())
+}
+
+enum Role{
+    USER
+    ADMIN
+}
